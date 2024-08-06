@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option java_package = "com.employee.rest.api.development.grpc";
+option java_multiple_files = true;
+
+import "google/protobuf/empty.proto";
+
+message Employee {
+    int32 id = 1;
+    string name = 2;
+    string designation = 3;
+    double salary = 4;
+    string department = 5;
+}
+
+message EmployeeRequest {
+    int32 id = 1;
+}
+
+message EmployeeResponse {
+    repeated Employee employees = 1;
+}
+
+service EmployeeService {
+    rpc GetEmployeeById(EmployeeRequest) returns (Employee) {}
+    rpc GetAllEmployees(google.protobuf.Empty) returns (EmployeeResponse) {}
+    rpc CreateEmployee(Employee) returns (Employee) {}
+    rpc UpdateEmployee(Employee) returns (Employee) {}
+    rpc DeleteEmployee(EmployeeRequest) returns (google.protobuf.Empty) {}
+}
